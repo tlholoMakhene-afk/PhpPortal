@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Projects API</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script language="JavaScript" src="API-Test.js"></script>
+  <script language="JavaScript" src="../app.js"></script>
+  <link rel="icon" type="image/png" href="../api.png"/>
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <h4 class="text-center my-3"> Abstrct web api example - projects api</h4>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> API Base URL</span>
+      </div>
+      <input type="text" id="APIBaseURL" class="form-control" placeholder="Enter API Base URL">
+    </div>
+
+    <br>
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header">
+
+          <a class="card-link" data-toggle="collapse" href="#collapse1">
+            <span class="badge badge-primary">GET</span>
+            <span>Get Projects (GET: /projects)</span>
+          </a>
+        </div>
+        <div id="collapse1" class="collapse show" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab" data-toggle="tab" href="#execute" role="tab"
+                aria-controls="executee" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab" data-toggle="tab" href="#code" role="tab" aria-controls="code"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab" data-toggle="tab" href="#description" role="tab"
+                aria-controls="description" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute" role="tabpanel" aria-labelledby="execute-tab">
+              <div class="card-body">
+                <form>
+                  <button class="btn btn-warning" name="Submit" type="button" onclick="GetProjects()">Execute</button>
+                </form>
+                <div>
+                  <br>
+                  <label for="result"><b>Response:</b></label>
+                  <table class="table table-bordered">
+                    <tr class="d-flex">
+                      <th class="col-1">Status Code</th>
+                      <th class="col-11">Description/Output</th>
+                    </tr>
+                    <tr class="d-flex">
+                      <td id="GetProjectsStatusCode" class="col-1"></td>
+                      <td id="GetProjectsoutput" class="col-11"></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code" role="tabpanel" aria-labelledby="code-tab">
+              <button onclick="CopyToClipboard('codeGetProjects')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id="codeGetProjects">
+                      $.ajax({
+                        url: &lt;APIBaseUrl&gt; + '/projects',
+                        type: 'GET',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        cache: false,
+                        success: function (data, textStatus, xhr) {
+                          //success
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                          //log errors
+                        }
+                      });
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
+              <div class="card-body">
+                <p class="text-justify">This API is to fetch all the projects.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapse2">
+            <span class="badge badge-success">POST</span>
+            <span>Upload Project (POST: /projects/new/)</span>
+          </a>
+        </div>
+        <div id="collapse2" class="collapse" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab2" data-toggle="tab" href="#execute2" role="tab"
+                aria-controls="executee" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab2" data-toggle="tab" href="#code2" role="tab" aria-controls="code"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab2" data-toggle="tab" href="#description2" role="tab"
+                aria-controls="description" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute2" role="tabpanel" aria-labelledby="execute-tab2">
+              <div class="card-body">
+                <div class="card-body">
+                  <form>
+                    <div class="input-group">
+                        <div class="input-group mb-3">
+                        <input id="uploadUserId" name="userId" class="form-control" placeholder="id - The User Id.">
+                        </div>
+                      <div class="custom-file col-sm-6">
+                        <input type="file" name="fileupload" id="fileupload" class="custom-file-input form-control">
+                        <label class="custom-file-label form-control" for="fileupload">Browse Project file
+                          to
+                          Upload</label>
+                      </div>
+                      <button class="btn btn-warning ml-3" name="Submit" type="button"
+                        onclick="uploadProject()">Submit</button>
+                    </div>
+                  </form>
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr class="d-flex">
+                        <th class="col-1">Status Code</th>
+                        <th class="col-11">Description/Output</th>
+                      </tr>
+                      <tr class="d-flex">
+                        <td id="UploadProjectStatusCode" class="col-1"></td>
+                        <td id="UploadProjectsoutput" class="col-11"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code2" role="tabpanel" aria-labelledby="code-tab2">
+              <button onclick="CopyToClipboard('codePostUploadProject')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id='codePostUploadProject'>
+                         var form = new FormData();
+                          form.append('file', $('#fileupload').get(0).files[0]);
+                          form.append('userId',  $('#uploadUserId').val());
+                          $.ajax({
+                            url: 'ajaxupload.php',
+                            type: 'POST',
+                            processData: false, // Don't process the files
+                            contentType: false, 
+                            mimeType: 'multipart/form-data',
+                            data: form,
+                            cache: false,
+                            success: function (data, textStatus, xhr) {
+                              $('td#UploadProjectStatusCode').html(xhr.status);
+                              $('td#UploadProjectsoutput').html(JSON.stringify(data));
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                              $('td#UploadProjectStatusCode').html(xhr.status);
+                              $('td#UploadProjectsoutput').html(errorThrown);
+                              console.log(errorThrown);
+                            }
+                          });
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description2" role="tabpanel" aria-labelledby="description-tab2">
+              <div class="card-body" style="height: 25rem;overflow-y: auto;">
+                <p class="text-justify">This API is to upload project.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapse3">
+            <span class="badge badge-primary">GET</span>
+            <span>Get Upload Attemp by Id (GET: /projects/s/{id})</span>
+          </a>
+        </div>
+        <div id="collapse3" class="collapse" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab3" data-toggle="tab" href="#execute3" role="tab"
+                aria-controls="executee3" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab3" data-toggle="tab" href="#code3" role="tab" aria-controls="code3"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab3" data-toggle="tab" href="#description3" role="tab"
+                aria-controls="description3" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute3" role="tabpanel" aria-labelledby="execute-tab3">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <input id="getProjectId" name="getProjectId" class="form-control"
+                      placeholder="id - The Project Id.">
+                    <div class="input-group-append">
+                      <button class="btn btn-warning" name="Submit" type="button"
+                        onclick="GetUploadProjectById()">Submit</button>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr class="d-flex">
+                        <th class="col-1">Status Code</th>
+                        <th class="col-11">Description/Output</th>
+                      </tr>
+                      <tr class="d-flex">
+                        <td id="GetProjectStatusCode" class="col-1"></td>
+                        <td id="GetProjectoutput" class="col-11"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code3" role="tabpanel" aria-labelledby="code-tab3">
+              <button onclick="CopyToClipboard('codeGetProjectById')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id="codeGetProjectById">
+                      $.ajax({
+                        url: &lt;APIBaseUrl&gt; + '/projects/' + <projectId>,
+                        type: 'GET',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        cache: false,
+                        success: function (data, textStatus, xhr) {
+                         //success
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                          //log errors
+                        }
+                      });
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description3" role="tabpanel" aria-labelledby="description-tab3">
+              <div class="card-body">
+                <p class="text-justify">This API is to get project by id.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapse4">
+            <span class="badge badge-success">POST</span>
+            <span>Update a Project Metadata(POST: /projects/u/{id})</span>
+          </a>
+        </div>
+        <div id="collapse4" class="collapse" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab4" data-toggle="tab" href="#execute4" role="tab"
+                aria-controls="executee4" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab4" data-toggle="tab" href="#code4" role="tab" aria-controls="code4"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab4" data-toggle="tab" href="#description4" role="tab"
+                aria-controls="description4" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute4" role="tabpanel" aria-labelledby="execute-tab4">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <input id="projectId" name="projectId" class="form-control" placeholder="id - The Project Id.">
+                  </div>
+                  <div class="input-group mb-3">
+                    <input id="update_metadata_displayname" name="displayname" class="form-control" placeholder="Display Name">
+                    <input id="update_metadata_description" name="description" class="form-control" placeholder="Description">
+                    <div class="input-group-append">
+                      <button class="btn btn-warning" name="Submit" type="button"
+                        onclick="updateProjectMetaData()">Submit</button>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr class="d-flex">
+                        <th class="col-1">Status Code</th>
+                        <th class="col-11">Description/Output</th>
+                      </tr>
+                      <tr class="d-flex">
+                        <td id="UpdateProjectMetadataStatusCode" class="col-1"></td>
+                        <td id="UpdateProjectMetadataoutput" class="col-11"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code4" role="tabpanel" aria-labelledby="code-tab4">
+              <button onclick="CopyToClipboard('codePutProjectMetadata')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id='codePutProjectMetadata'>
+                      $.ajax({
+                        url: &lt;APIBaseUrl&gt; + '/projects/' + <projectId>,
+                        type: 'POST',
+                        contentType: 'application/json',
+                        cache: false,
+                        data: JSON.stringify({
+                          "displayName": <displayname>,
+                          "description": <description>
+                        }),
+                        success: function (data, textStatus, xhr) {
+                          //success
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                          //log errors
+                        }
+                      });
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description4" role="tabpanel" aria-labelledby="description-tab4">
+              <div class="card-body">
+                <p class="text-justify">This API is to update existing project metadata.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapse5">
+            <span class="badge badge-success">POST</span>
+            <span>Delete a Project(POST: /projects/d/{id})</span>
+          </a>
+        </div>
+        <div id="collapse5" class="collapse" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab5" data-toggle="tab" href="#execute5" role="tab"
+                aria-controls="executee5" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab5" data-toggle="tab" href="#code5" role="tab" aria-controls="code5"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab5" data-toggle="tab" href="#description5" role="tab"
+                aria-controls="description5" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute5" role="tabpanel" aria-labelledby="execute-tab5">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <input id="delete_projectId" name="projectId" class="form-control" placeholder="id - The Project Id.">
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-append">
+                      <button class="btn btn-warning" name="Submit" type="button"
+                        onclick="deleteProject()">Submit</button>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr class="d-flex">
+                        <th class="col-1">Status Code</th>
+                        <th class="col-11">Description/Output</th>
+                      </tr>
+                      <tr class="d-flex">
+                        <td id="DeleteProjectStatusCode" class="col-1"></td>
+                        <td id="DeleteProjectoutput" class="col-11"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code5" role="tabpanel" aria-labelledby="code-tab5">
+              <button onclick="CopyToClipboard('codeDeleteProject')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id='codeDeleteProject'>
+                      $.ajax({
+                        url: &lt;APIBaseUrl&gt; + '/projects/' + &lt;projectId&gt;,
+                        type: 'DELETE',
+                        contentType: 'application/json',
+                        cache: false,
+                        success: function (data, textStatus, xhr) {
+                          //success
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                          //log errors
+                        }
+                      });
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description5" role="tabpanel" aria-labelledby="description-tab5">
+              <div class="card-body">
+                <p class="text-justify">This API is to delete existing project.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapse6">
+            <span class="badge badge-success">POST</span>
+            <span>Share a project (POST: /projects/{id}/share)</span>
+          </a>
+        </div>
+        <div id="collapse6" class="collapse" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab6" data-toggle="tab" href="#execute6" role="tab"
+                aria-controls="executee6" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab6" data-toggle="tab" href="#code6" role="tab" aria-controls="code6"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab6" data-toggle="tab" href="#description6" role="tab"
+                aria-controls="description6" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute6" role="tabpanel" aria-labelledby="execute-tab6">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <input id="shareproject_projectId" name="projectId" class="form-control" placeholder="id - The Project Id.">
+                  </div>
+                  <div class="input-group mb-3">
+                    <textarea id="shareproject_userids" name="shareproject_userids" rows="4" cols="50">[""]</textarea>
+                  </div>
+                    <div class="input-group-append">
+                      <button class="btn btn-warning" name="Submit" type="button"
+                        onclick="shareProject()">Submit</button>
+                    </div>
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr class="d-flex">
+                        <th class="col-1">Status Code</th>
+                        <th class="col-11">Description/Output</th>
+                      </tr>
+                      <tr class="d-flex">
+                        <td id="ShareProjectStatusCode" class="col-1"></td>
+                        <td id="ShareProjectoutput" class="col-11"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code6" role="tabpanel" aria-labelledby="code-tab6">
+              <button onclick="CopyToClipboard('codePutShareProject')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id='codePutShareProject'>
+                    $.ajax({
+                      url: &lt;APIBaseUrl&gt; + '/projects/' + projectId + '/share?userIds=' + userIds,
+                      type: 'POST',
+                      contentType: 'application/json',
+                      cache: false,
+                      success: function (data, textStatus, xhr) {
+                        $('td#ShareProjectStatusCode').html(xhr.status);
+                        $('td#ShareProjectoutput').html(JSON.stringify(data));
+                      },
+                      error: function (xhr, textStatus, errorThrown) {
+                        $('td#ShareProjectStatusCode').html(xhr.status);
+                        $('td#ShareProjectoutput').html(errorThrown);
+                        console.log(errorThrown);
+                      }
+                    });
+                  }
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description6" role="tabpanel" aria-labelledby="description-tab6">
+              <div class="card-body">
+                <p class="text-justify">This API shares a project to users.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapse7">
+            <span class="badge badge-success">POST</span>
+            <span>Unshare a project (POST: /projects/{id}/unshare)</span>
+          </a>
+        </div>
+        <div id="collapse7" class="collapse" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab7" data-toggle="tab" href="#execute7" role="tab"
+                aria-controls="executee7" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab7" data-toggle="tab" href="#code7" role="tab" aria-controls="code7"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab7" data-toggle="tab" href="#description7" role="tab"
+                aria-controls="description7" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute7" role="tabpanel" aria-labelledby="execute-tab7">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <input id="unshareproject_projectId" name="projectId" class="form-control" placeholder="id - The Project Id.">
+                  </div>
+                  <div class="input-group mb-3">
+                    <textarea id="unshareproject_userids" name="unshareproject_userids" rows="4" cols="50">[""]</textarea>
+                  </div>
+                    <div class="input-group-append">
+                      <button class="btn btn-warning" name="Submit" type="button"
+                        onclick="unshareProject()">Submit</button>
+                    </div>
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr class="d-flex">
+                        <th class="col-1">Status Code</th>
+                        <th class="col-11">Description/Output</th>
+                      </tr>
+                      <tr class="d-flex">
+                        <td id="UnshareProjectStatusCode" class="col-1"></td>
+                        <td id="UnshareProjectoutput" class="col-11"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code7" role="tabpanel" aria-labelledby="code-tab7">
+              <button onclick="CopyToClipboard('codeDeleteUnshareProject')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id='codeDeleteUnshareProject'>
+                    $.ajax({
+                      url: APIBaseUrl + '/projects/' + projectId + '/share,
+                      type: 'DELETE',
+                      contentType: 'application/json',
+                      cache: false,
+                      success: function (data, textStatus, xhr) {
+                        $('td#UnshareProjectStatusCode').html(xhr.status);
+                        $('td#UnshareProjectoutput').html(JSON.stringify(data));
+                      },
+                      error: function (xhr, textStatus, errorThrown) {
+                        $('td#UnshareProjectStatusCode').html(xhr.status);
+                        $('td#UnshareProjectoutput').html(errorThrown);
+                        console.log(errorThrown);
+                      }
+                    });
+                  }
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description7" role="tabpanel" aria-labelledby="description-tab7">
+              <div class="card-body">
+                <p class="text-justify">This API unshares a project to users.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

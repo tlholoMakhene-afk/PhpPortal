@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+  <title>Users API</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script language="JavaScript" src="API-Test.js"></script>
+  <script language="JavaScript" src="../app.js"></script>
+  <link rel="icon" type="image/png" href="../api.png"/>
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <h4 class="text-center my-3">Abstrct Web API Example - Users API</h4>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text"> API Base URL</span>
+      </div>
+      <input type="text" id="APIBaseURL" class="form-control" placeholder="Enter API Base URL">
+    </div>
+
+    <br>
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#collapse1">
+            <span class="badge badge-primary">GET</span>
+            <span>Get User Info (GET: /users/s/{id}/)</span>
+          </a>
+        </div>
+        <div id="collapse1" class="collapse show" data-parent="#accordion">
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab" data-toggle="tab" href="#execute" role="tab"
+                aria-controls="executee" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab" data-toggle="tab" href="#code" role="tab" aria-controls="code"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab" data-toggle="tab" href="#description" role="tab"
+                aria-controls="description" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute" role="tabpanel" aria-labelledby="execute-tab">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <form>
+                    <div class="input-group mb-3">
+                    <input id="getUserInfoId" name="userId" class="form-control" placeholder="id - The User Id.">
+                    </div>
+                    <div class="input-group mb-3">
+                      <button class="btn btn-warning" name="Submit" type="button"
+                        onclick="GetUserInfo()">Submit</button>
+                    </div>
+                  </form>
+
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>Status Code</th>
+                        <th>Description/Output</th>
+                      </tr>
+                      <tr>
+                        <td id="GetUserInfoStatusCode"></td>
+                        <td id="GetUserInfooutput"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code" role="tabpanel" aria-labelledby="code-tab">
+              <button onclick="CopyToClipboard('codeGetUserInfo')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id="codeGetUserInfo">
+
+                      $.ajax({
+                          url: APIBaseUrl + '/users/s/' + userId + '/',
+                          type: 'GET',
+                          contentType: 'application/json',
+                          dataType: 'json',
+                          cache: false,
+                          success: function (data, textStatus, xhr) {
+                             //success
+                          },
+                          error: function (xhr, textStatus, errorThrown) {
+                              //log errors
+                          }
+                      });
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="description-tab">
+              <div class="card-body">
+                <p class="text-justify">This API is to get current user info.</p>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#collapse3">
+            <span class="badge badge-primary">GET</span>
+            <span>Get All Users Info (GET: /users/)</span>
+          </a>
+        </div>
+        <div id="collapse3" class="collapse" data-parent="#accordion">
+
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab" data-toggle="tab" href="#execute3" role="tab"
+                aria-controls="executee3" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab" data-toggle="tab" href="#code3" role="tab" aria-controls="code3"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab" data-toggle="tab" href="#description3" role="tab"
+                aria-controls="description3" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute3" role="tabpanel" aria-labelledby="execute-tab">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <form>
+                    <div class="input-group mb-3">
+                      <button class="btn btn-warning" name="Submit" type="button" onclick="GetUsers()">Submit</button>
+                    </div>
+                  </form>
+
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>Status Code</th>
+                        <th>Description/Output</th>
+                      </tr>
+                      <tr>
+                        <td id="GetUserstatusCode"></td>
+                        <td id="GetUsersoutput"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code3" role="tabpanel" aria-labelledby="code-tab">
+              <button onclick="CopyToClipboard('codeGetUsers')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id="codeGetUsers">
+
+                      $.ajax({
+                        url: APIBaseUrl + '/users/',
+                        type: 'GET',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        cache: false,
+                        success: function (data, textStatus, xhr) {
+                          //success
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                          //log errors
+                        }
+                    });
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description3" role="tabpanel" aria-labelledby="description-tab">
+              <div class="card-body">
+                <p class="text-justify">This API is to get all users.</p>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapse2">
+            <span class="badge badge-warning">POST</span>
+            <span>Insert User (POST: /Users/new/)</span>
+          </a>
+        </div>
+        <div id="collapse2" class="collapse" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab2" data-toggle="tab" href="#execute2" role="tab"
+                aria-controls="executee2" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab2" data-toggle="tab" href="#code2" role="tab" aria-controls="code2"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab2" data-toggle="tab" href="#description2" role="tab"
+                aria-controls="description2" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute2" role="tabpanel" aria-labelledby="execute-tab2">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <textarea id="insert_user_displayname_group" name="insert_user_displayname_group" rows="4" cols="50">{"displayName":"string","group":"string","email":"string@string.com"}</textarea>
+                  </div>
+                  <div class="input-group-append">
+                    <button class="btn btn-warning" name="Submit" type="button" onclick="InsertUser()">Submit</button>
+                  </div>
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>Status Code</th>
+                        <th>Description/Output</th>
+                      </tr>
+                      <tr>
+                        <td id="InsertUserInfoStatusCode"></td>
+                        <td id="InsertUserInfooutput"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code2" role="tabpanel" aria-labelledby="code-tab2">
+              <button onclick="CopyToClipboard('codeInsertUser')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id='codeInsertUser'>
+
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description2" role="tabpanel" aria-labelledby="description-tab2">
+              <div class="card-body">
+                <p class="text-justify">This API is to create a new user.
+                </p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapse4">
+            <span class="badge badge-warning">POST</span>
+            <span>Update User By Id (POST: /Users/u/{id}/)</span>
+          </a>
+        </div>
+        <div id="collapse4" class="collapse" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab4" data-toggle="tab" href="#execute4" role="tab"
+                aria-controls="executee4" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab4" data-toggle="tab" href="#code4" role="tab" aria-controls="code4"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab4" data-toggle="tab" href="#description4" role="tab"
+                aria-controls="description4" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute4" role="tabpanel" aria-labelledby="execute-tab4">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <input id="updateUserId" name="userId" class="form-control" placeholder="id - The User Id.">
+                  </div>
+                  <div class="input-group mb-3">
+                    <textarea id="update_user_displayname_group" name="update_user_displayname_group" rows="4" cols="50">{"displayName": "string","group": "string" }</textarea>
+                  </div>
+                  <div class="input-group-append">
+                    <button class="btn btn-warning" name="Submit" type="button" onclick="UpdateUser()">Submit</button>
+                  </div>
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>Status Code</th>
+                        <th>Description/Output</th>
+                      </tr>
+                      <tr>
+                        <td id="UpdateUserInfoStatusCode"></td>
+                        <td id="UpdateUserInfooutput"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code4" role="tabpanel" aria-labelledby="code-tab4">
+              <button onclick="CopyToClipboard('codeUpdateUserInfo')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id='codeUpdateUserInfo'>
+                      $.ajax({
+                        url: APIBaseUrl + '/users/' + userId + '/',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        data: $("#update_user_displayname_group").val(),
+                        cache: false,
+                        success: function (data, textStatus, xhr) {
+                          //success
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                          //log errors
+                        }
+                      });
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description4" role="tabpanel" aria-labelledby="description-tab4">
+              <div class="card-body">
+                <p class="text-justify">This API is to update existing user information. This request should be a PUT but forced to use Post due to the fact that the API is on a Shared VPS.
+                </p>
+                <br/>
+                      POST is used to send data to a server to create/update a resource.
+                    <ul>
+                        <li>POST requests are never cached</li>
+                        <li>POST requests do not remain in the browser history</li>
+                        <li>POST requests cannot be bookmarked</li>
+                         <li>POST requests have no restrictions on data length</li>
+                    </ul>
+                    <p>
+                  PUT is used to send data to a server to create/update a resource.
+                  The difference between POST and PUT is that PUT requests are idempotent.
+                  That is, calling the same PUT request multiple times will always produce the same result.
+                  In contrast, calling a POST request repeatedly have side effects of creating the same resource multiple times.     
+                    </p>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+       <div class="card">
+        <div class="card-header">
+          <a class="collapsed card-link" data-toggle="collapse" href="#collapse5">
+            <span class="badge badge-warning">POST</span>
+            <span>Delete User By Id (POST: /Users/d/{id}/)</span>
+          </a>
+        </div>
+        <div id="collapse5" class="collapse" data-parent="#accordion">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="execute-tab5" data-toggle="tab" href="#execute5" role="tab"
+                aria-controls="executee5" aria-selected="true">Execute</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="code-tab5" data-toggle="tab" href="#code5" role="tab" aria-controls="code5"
+                aria-selected="false">Code Snippet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="description-tab5" data-toggle="tab" href="#description5" role="tab"
+                aria-controls="description5" aria-selected="false">API Description</a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="execute5" role="tabpanel" aria-labelledby="execute-tab5">
+              <div class="card-body">
+
+                <div class="card-body">
+                  <div class="input-group mb-3">
+                    <input id="deleteUserId" name="userId" class="form-control" placeholder="id - The User Id.">
+                  </div>
+                  <div class="input-group-append">
+                    <button class="btn btn-warning" name="Submit" type="button" onclick="DeleteUser()">Submit</button>
+                  </div>
+                  <div>
+                    <br>
+                    <label for="result"><b>Response:</b></label>
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>Status Code</th>
+                        <th>Description/Output</th>
+                      </tr>
+                      <tr>
+                        <td id="DeleteUserStatusCode"></td>
+                        <td id="DeleteUseroutput"></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="code5" role="tabpanel" aria-labelledby="code-tab5">
+              <button onclick="CopyToClipboard('codeDeleteUser')"
+                class="btn btn-outline-primary btn-sm float-right my-3 mr-5">Click to copy</button>
+              <figure class="figure">
+                <figcaption class="figure-caption">
+                  <pre>
+                  <code id='codeDeleteUser'>
+                    $.ajax({
+                        url: APIBaseUrl + '/users/d/' + userId + '/',
+                        type: 'GET',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        cache: false,
+                        success: function (data, textStatus, xhr) {
+                          $('td#DeleteUserStatusCode').html(xhr.status);
+                          $('td#DeleteUseroutput').html(JSON.stringify(data));
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                          $('td#DeleteUserStatusCode').html(xhr.status);
+                          $('td#DeleteUseroutput').html(errorThrown);
+                          console.log(errorThrown);
+                        }
+                      });
+                  </code>
+                </pre>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="tab-pane fade" id="description5" role="tabpanel" aria-labelledby="description-tab5">
+              <div class="card-body">
+                <p class="text-justify">This API is to delete existing user. 
+                The HTTP DELETE method is used to delete a resource from the server. 
+                Unlike GET and HEAD requests, the DELETE requests may change the server state.
+                Sending a message body on a DELETE request might cause some servers to reject the request.
+                But you still can send data to the server using URL parameters. This is usually an ID of the resource you want to delete. 
+                But because the API is on a shared VPS, we cannot send DELETE request</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>
