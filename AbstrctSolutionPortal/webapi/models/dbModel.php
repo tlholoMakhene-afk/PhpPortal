@@ -2,8 +2,8 @@
 class DBController {
 	private $conn = "";
 	private $host = "localhost";
-	private $user = "delitfwy_dbAdmin";
-	private $password = "TlholoMakhene";
+	private $user = "";
+	private $password = "";
 	private $database = "delitfwy_dbProjectPortal";
 
 	function __construct() {
